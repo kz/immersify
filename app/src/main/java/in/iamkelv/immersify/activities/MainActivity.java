@@ -1,19 +1,17 @@
 package in.iamkelv.immersify.activities;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import in.iamkelv.immersify.R;
 import in.iamkelv.immersify.fragments.StatusFragment;
+import in.iamkelv.immersify.utils.ImmersiveModeUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,9 +46,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         // Check for WRITE_SECURE_SETTINGS permission
-        int permissionCheck = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_SECURE_SETTINGS);
-        mSecureSettingsState = (permissionCheck == PackageManager.PERMISSION_GRANTED);
+        mSecureSettingsState = ImmersiveModeUtils.hasSecureSettingsPermission(this);
     }
 
     /**
