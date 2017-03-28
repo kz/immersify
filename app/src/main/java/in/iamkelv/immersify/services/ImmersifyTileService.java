@@ -1,6 +1,7 @@
 package in.iamkelv.immersify.services;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -80,12 +81,12 @@ public class ImmersifyTileService extends TileService {
     }
 
     private void showToast(final String text) {
+        final Context thisContext = this;
         Handler handler = new Handler(Looper.getMainLooper());
-
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(ImmersifyTileService.this.getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                Toast.makeText(thisContext, text, Toast.LENGTH_LONG).show();
             }
         });
     }
