@@ -16,4 +16,5 @@
     <string name="secure_settings_granted">Yes! Immersify will function properly.</string>
     <string name="secure_settings_denied">No! Please follow the installation instructions for the app to work.</string>
     <string name="installation_instructions">Coming soon.</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
