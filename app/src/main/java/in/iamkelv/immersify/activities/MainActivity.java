@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import in.iamkelv.immersify.R;
+import in.iamkelv.immersify.fragments.SettingsFragment;
 import in.iamkelv.immersify.fragments.StatusFragment;
 import in.iamkelv.immersify.utils.ImmersiveModeUtils;
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return StatusFragment.newInstance(mSecureSettingsState);
                 case 1:
-                    return StatusFragment.newInstance(mSecureSettingsState);
+                    return SettingsFragment.newInstance();
                 default:
                     return StatusFragment.newInstance(mSecureSettingsState);
             }
