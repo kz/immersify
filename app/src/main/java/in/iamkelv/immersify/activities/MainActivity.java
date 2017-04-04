@@ -7,12 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 
 import in.iamkelv.immersify.R;
 import in.iamkelv.immersify.fragments.SettingsFragment;
 import in.iamkelv.immersify.fragments.StatusFragment;
 import in.iamkelv.immersify.utils.ImmersiveModeUtils;
+import in.iamkelv.immersify.utils.ToggleNotification;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Check for WRITE_SECURE_SETTINGS permission
         mSecureSettingsState = ImmersiveModeUtils.hasSecureSettingsPermission(this);
+
+        // Initialize default preferences
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        // Ensure that the notification is created if applicable
+        ToggleNotification.ensureShown(this);
     }
 
     /**

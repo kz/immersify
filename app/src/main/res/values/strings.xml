@@ -12,9 +12,11 @@
 
     <!-- Status fragment -->
     <string name="permissions_granted_header">Permissions Granted?</string>
-    <string name="instructions_header">Installation Instructions</string>
     <string name="secure_settings_granted">Yes! Immersify will function properly.</string>
     <string name="secure_settings_denied">No! Please follow the installation instructions for the app to work.</string>
-    <string name="installation_instructions">Coming soon.</string>
+    <string name="installation_instructions_header">Installation Instructions</string>
+    <string name="installation_instructions">In order for this app to work, a special system permission, WRITE_SECURE_SETTINGS, needs to be granted to this app via adb.\n\nTo do so, connect your phone to adb and type the following command into your terminal:\n\nadb shell pm grant in.iamkelv.immersify android.permission.WRITE_SECURE_SETTINGS\n\nRestart this app and the permissions should be granted.</string>
+    <string name="usage_instructions_header">Usage Instructions</string>
+    <string name="usage_instructions">Immersify comes with a notification which you can press to toggle immersive mode. Additionally, if you are on Android 7.0 (Nougat) or higher, Immersify also has a tile which can also be used to achieve this.</string>
     <string name="title_activity_settings">Settings</string>
 </resources>

@@ -23,6 +23,15 @@ public class ImmersiveModeUtils {
         return (!policyControl.equals(IMMERSIVE_DISABLED));
     }
 
+    public static boolean toggleImmersiveMode(@NonNull Context context) {
+        // Change the immersive mode status depending on the current status
+        if (isImmersiveModeActive(context)) {
+            return Settings.Global.putString(context.getContentResolver(), POLICY_CONTROL, IMMERSIVE_DISABLED);
+        } else {
+            return Settings.Global.putString(context.getContentResolver(), POLICY_CONTROL, IMMERSIVE_ENABLED);
+        }
+    }
+
     public static boolean enableImmersiveMode(@NonNull Context context) {
         return Settings.Global.putString(context.getContentResolver(), POLICY_CONTROL, IMMERSIVE_ENABLED);
     }
