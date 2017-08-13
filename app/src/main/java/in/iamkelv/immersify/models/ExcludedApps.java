@@ -29,4 +29,8 @@ public class ExcludedApps {
         editor.remove(packageName);
         editor.apply();
     }
+
+    public boolean contains(String packageName) {
+        return settings.contains(packageName);
+    }
 }

@@ -1,5 +1,6 @@
 package in.iamkelv.immersify.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
@@ -7,6 +8,8 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.widget.Toast;
 
 import in.iamkelv.immersify.R;
+import in.iamkelv.immersify.activities.ExcludeAppsActivity;
+import in.iamkelv.immersify.activities.MainActivity;
 import in.iamkelv.immersify.utils.ImmersiveModeUtils;
 import in.iamkelv.immersify.utils.ToggleNotification;
 
@@ -66,6 +69,18 @@ public class SettingsFragment extends PreferenceFragmentCompat
                             "Unable to toggle immersive mode. An unknown error occurred.",
                             Toast.LENGTH_LONG).show();
                 }
+                return true;
+            }
+        });
+
+        // Register onPreferenceClickListener for "Exclude apps"
+        Preference excludeAppsPref = findPreference(KEY_EXCLUDE_APPS);
+        excludeAppsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(getActivity(), ExcludeAppsActivity.class);
+                startActivity(intent);
+
                 return true;
             }
         });
