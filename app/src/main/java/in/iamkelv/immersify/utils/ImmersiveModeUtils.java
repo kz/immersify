@@ -20,7 +20,7 @@ public class ImmersiveModeUtils {
 
     public static boolean isImmersiveModeActive(@NonNull Context context) {
         String policyControl = Settings.Global.getString(context.getContentResolver(), POLICY_CONTROL);
-        return (!policyControl.equals(IMMERSIVE_DISABLED));
+        return !(policyControl == null || policyControl.equals(IMMERSIVE_DISABLED));
     }
 
     public static boolean toggleImmersiveMode(@NonNull Context context) {
