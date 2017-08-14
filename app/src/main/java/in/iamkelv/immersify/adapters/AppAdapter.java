@@ -7,25 +7,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import in.iamkelv.immersify.R;
-import in.iamkelv.immersify.models.AppItem;
+import in.iamkelv.immersify.models.AppEntry;
 
-public class AppAdapter extends ArrayAdapter<AppItem>{
+public class AppAdapter extends ArrayAdapter<AppEntry>{
 
-    private ArrayList<AppItem> apps;
+    private ArrayList<AppEntry> apps;
     Context mContext;
 
     // View lookup cache
     private static class ViewHolder {
         TextView appNameTextView;
+        ImageView iconImageView;
         SwitchCompat isAppEnabledSwitch;
     }
 
-    public AppAdapter(ArrayList<AppItem> data, Context context) {
+    public AppAdapter(ArrayList<AppEntry> data, Context context) {
         super(context, R.layout.app_row_item, data);
         this.apps = data;
         this.mContext = context;
@@ -37,7 +39,7 @@ public class AppAdapter extends ArrayAdapter<AppItem>{
     }
 
     @Override
-    public AppItem getItem(int position) {
+    public AppEntry getItem(int position) {
         return ((apps != null) ? apps.get(position) : null);
     }
 
@@ -52,6 +54,7 @@ public class AppAdapter extends ArrayAdapter<AppItem>{
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.app_row_item, parent, false);
             viewHolder.appNameTextView = (TextView) convertView.findViewById(R.id.appNameTextView);
+            viewHolder.iconImageView = (ImageView) convertView.findViewById(R.id.iconImageView);
             viewHolder.isAppEnabledSwitch = (SwitchCompat) convertView.findViewById(R.id.isAppEnabledSwitch);
 
             result=convertView;
@@ -62,9 +65,10 @@ public class AppAdapter extends ArrayAdapter<AppItem>{
             result=convertView;
         }
 
-        AppItem item = getItem(position);
+        AppEntry item = getItem(position);
 
         viewHolder.appNameTextView.setText(item.getName());
+        viewHolder.iconImageView.setImageDrawable(item.getIcon());
         viewHolder.isAppEnabledSwitch.setChecked(item.getIsEnabled());
 
         return result;

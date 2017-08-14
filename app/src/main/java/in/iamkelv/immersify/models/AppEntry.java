@@ -3,7 +3,10 @@ package in.iamkelv.immersify.models;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -11,17 +14,25 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AppItem {
+import in.iamkelv.immersify.R;
+
+public class AppEntry {
     private String mName;
+    private Drawable mIcon;
     private boolean mIsEnabled;
 
-    public AppItem(@NonNull String name, @NonNull boolean isEnabled) {
+    public AppEntry(@NonNull String name, @NonNull Drawable icon, @NonNull Boolean isEnabled) {
         mName = name;
+        mIcon = icon;
         mIsEnabled = isEnabled;
     }
 
     public String getName() {
         return mName;
+    }
+
+    public Drawable getIcon() {
+        return mIcon;
     }
 
     public void setIsEnabled(boolean isEnabled) {
@@ -35,33 +46,37 @@ public class AppItem {
     /*
      * Perform alphabetical comparison of application entry objects.
      */
-    private static final Comparator<AppItem> ALPHA_COMPARATOR = new Comparator<AppItem>() {
+    private static final Comparator<AppEntry> ALPHA_COMPARATOR = new Comparator<AppEntry>() {
         private final Collator sCollator = Collator.getInstance();
 
         @Override
-        public int compare(AppItem object1, AppItem object2) {
+        public int compare(AppEntry object1, AppEntry object2) {
             return sCollator.compare(object1.getName(), object2.getName());
         }
     };
 
-    public static ArrayList<AppItem> getListFromPackageManager(Context context) {
+    public static ArrayList<AppEntry> getListFromPackageManager(Context context) {
         PackageManager packageManager = context.getPackageManager();
         ExcludedApps excludedApps = new ExcludedApps(context);
 
-        ArrayList<AppItem> appItems = new ArrayList<>();
+        ArrayList<AppEntry> appItems = new ArrayList<>();
 
         List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(0);
         for (PackageInfo packageInfo : packageInfoList) {
             // Get the package info name (com.example.app)
             String name = packageInfo.packageName;
+            // Set the default icon
+            Drawable icon = ContextCompat.getDrawable(context, R.drawable.ic_android_black_24dp);
             if (packageInfo.applicationInfo != null) {
                 // Get the application name if exists (Example App)
                 name = packageInfo.applicationInfo.loadLabel(packageManager).toString();
+                // Get the application icon
+                icon = packageInfo.applicationInfo.loadIcon(packageManager);
             }
-
+            // Get whether the application is enabled
             Boolean isEnabled = !excludedApps.contains(packageInfo.packageName);
 
-            appItems.add(new AppItem(name, isEnabled));
+            appItems.add(new AppEntry(name, icon, isEnabled));
         }
 
         Collections.sort(appItems, ALPHA_COMPARATOR);

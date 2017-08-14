@@ -2,19 +2,17 @@ package in.iamkelv.immersify.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import in.iamkelv.immersify.R;
 import in.iamkelv.immersify.adapters.AppAdapter;
-import in.iamkelv.immersify.models.AppItem;
+import in.iamkelv.immersify.models.AppEntry;
 
 public class ExcludeAppsActivity extends AppCompatActivity {
 
-    ArrayList<AppItem> apps;
+    ArrayList<AppEntry> apps;
     ListView listView;
     private AppAdapter adapter;
 
@@ -25,7 +23,7 @@ public class ExcludeAppsActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.appListView);
 
-        ArrayList<AppItem> apps = AppItem.getListFromPackageManager(getApplicationContext());
+        ArrayList<AppEntry> apps = AppEntry.getListFromPackageManager(getApplicationContext());
 
         adapter = new AppAdapter(apps, getApplicationContext());
 
@@ -34,7 +32,7 @@ public class ExcludeAppsActivity extends AppCompatActivity {
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView parent, View view, int position, long id) {
-//                AppItem appItem = apps.get(position);
+//                AppEntry appItem = apps.get(position);
 //                appItem.setIsEnabled(!appItem.getIsEnabled());
 //                adapter.notifyDataSetChanged();
 //            }
