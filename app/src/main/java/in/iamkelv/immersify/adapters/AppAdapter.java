@@ -33,12 +33,12 @@ public class AppAdapter extends ArrayAdapter<AppItem>{
     }
     @Override
     public int getCount() {
-        return apps.size();
+        return ((apps != null) ? apps.size() : 0);
     }
 
     @Override
     public AppItem getItem(int position) {
-        return apps.get(position);
+        return ((apps != null) ? apps.get(position) : null);
     }
 
 

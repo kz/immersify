@@ -25,22 +25,19 @@ public class ExcludeAppsActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.appListView);
 
-        apps = new ArrayList<>();
-        apps.add(new AppItem("A", true));
-        apps.add(new AppItem("B", true));
-        apps.add(new AppItem("C", true));
+        ArrayList<AppItem> apps = AppItem.getListFromPackageManager(getApplicationContext());
 
         adapter = new AppAdapter(apps, getApplicationContext());
 
         listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                AppItem appItem = apps.get(position);
-                appItem.setIsEnabled(!appItem.getIsEnabled());
-                adapter.notifyDataSetChanged();
-            }
-        });
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView parent, View view, int position, long id) {
+//                AppItem appItem = apps.get(position);
+//                appItem.setIsEnabled(!appItem.getIsEnabled());
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
     }
 }
