@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import in.iamkelv.immersify.R;
 import in.iamkelv.immersify.models.AppEntry;
 
-public class AppAdapter extends ArrayAdapter<AppEntry>{
+public class AppAdapter extends ArrayAdapter<AppEntry> {
 
-    private ArrayList<AppEntry> apps;
-    Context mContext;
+    private ArrayList<AppEntry> mApps;
+    private Context mContext;
 
     // View lookup cache
     private static class ViewHolder {
@@ -27,23 +27,19 @@ public class AppAdapter extends ArrayAdapter<AppEntry>{
         SwitchCompat isAppEnabledSwitch;
     }
 
-    public AppAdapter(ArrayList<AppEntry> data, Context context) {
-        super(context, R.layout.app_row_item, data);
-        this.apps = data;
-        this.mContext = context;
-
-    }
-    @Override
-    public int getCount() {
-        return ((apps != null) ? apps.size() : 0);
+    public AppAdapter(Context context) {
+        super(context, R.layout.app_row_item);
+        mContext = context;
     }
 
-    @Override
-    public AppEntry getItem(int position) {
-        return ((apps != null) ? apps.get(position) : null);
+    public void setData(ArrayList<AppEntry> appEntries) {
+        clear();
+        if (appEntries != null) {
+            addAll(appEntries);
+        }
     }
 
-
+    @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
@@ -57,12 +53,12 @@ public class AppAdapter extends ArrayAdapter<AppEntry>{
             viewHolder.iconImageView = (ImageView) convertView.findViewById(R.id.iconImageView);
             viewHolder.isAppEnabledSwitch = (SwitchCompat) convertView.findViewById(R.id.isAppEnabledSwitch);
 
-            result=convertView;
+            result = convertView;
             convertView.setTag(viewHolder);
 
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+            result = convertView;
         }
 
         AppEntry item = getItem(position);
