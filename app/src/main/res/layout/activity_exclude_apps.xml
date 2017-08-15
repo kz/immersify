@@ -17,8 +17,6 @@
         android:id="@+id/appListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        android:visibility="invisible"/>
 
 </RelativeLayout>
