@@ -19,4 +19,5 @@
     <string name="usage_instructions_header">Usage Instructions</string>
     <string name="usage_instructions">Immersify comes with a notification which you can press to toggle immersive mode. Additionally, if you are on Android 7.0 (Nougat) or higher, Immersify also has a tile which can also be used to achieve this.</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="exclude_apps_activity_title">Included Apps</string>
 </resources>

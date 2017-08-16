@@ -21,7 +21,7 @@
         android:title="Hide navigation bar" />
     <android.support.v7.preference.PreferenceCategory android:title="Advanced" />
     <android.support.v7.preference.Preference
-        android:enabled="false"
+        android:enabled="true"
         android:key="pref_exclude_apps"
         android:summary="Disable immersive mode when specific apps are open"
         android:title="Exclude apps" />
