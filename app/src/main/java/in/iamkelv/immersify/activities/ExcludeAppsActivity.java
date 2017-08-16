@@ -1,9 +1,10 @@
 package in.iamkelv.immersify.activities;
 
+import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -27,6 +28,10 @@ public class ExcludeAppsActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exclude_apps);
 
+        getSupportActionBar().setTitle(R.string.exclude_apps_activity_title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mListView = (ListView) findViewById(R.id.appListView);
 
@@ -38,15 +43,6 @@ public class ExcludeAppsActivity extends AppCompatActivity implements LoaderMana
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
         getSupportLoaderManager().initLoader(0, null, this).forceLoad();
-//
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView parent, View view, int position, long id) {
-//                AppEntry appItem = mApps.get(position);
-//                appItem.setIsEnabled(!appItem.getIsEnabled());
-//                mAdapter.notifyDataSetChanged();
-//            }
-//        });
     }
 
     private void setListShown(boolean listShown) {
@@ -76,5 +72,16 @@ public class ExcludeAppsActivity extends AppCompatActivity implements LoaderMana
     public void onLoaderReset(Loader<ArrayList<AppEntry>> loader) {
         // Clear the data in the adapter.
         mAdapter.setData(null);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

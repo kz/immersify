@@ -7,18 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import in.iamkelv.immersify.R;
 import in.iamkelv.immersify.models.AppEntry;
+import in.iamkelv.immersify.models.ExcludedApps;
 
 public class AppAdapter extends ArrayAdapter<AppEntry> {
 
     private ArrayList<AppEntry> mApps;
-    private Context mContext;
+    private ExcludedApps mExcludedApps;
 
     // View lookup cache
     private static class ViewHolder {
@@ -29,7 +33,7 @@ public class AppAdapter extends ArrayAdapter<AppEntry> {
 
     public AppAdapter(Context context) {
         super(context, R.layout.app_row_item);
-        mContext = context;
+        mExcludedApps = new ExcludedApps(context);
     }
 
     public void setData(ArrayList<AppEntry> appEntries) {
@@ -61,11 +65,23 @@ public class AppAdapter extends ArrayAdapter<AppEntry> {
             result = convertView;
         }
 
-        AppEntry item = getItem(position);
+        final AppEntry item = getItem(position);
 
-        viewHolder.appNameTextView.setText(item.getName());
+        viewHolder.appNameTextView.setText(item.getLabel());
         viewHolder.iconImageView.setImageDrawable(item.getIcon());
         viewHolder.isAppEnabledSwitch.setChecked(item.getIsEnabled());
+
+        viewHolder.isAppEnabledSwitch.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (((SwitchCompat) v).isChecked()) {
+                    mExcludedApps.remove(item.getPackageName());
+                } else {
+                    mExcludedApps.add(item.getPackageName());
+                }
+            }
+        });
 
         return result;
     }

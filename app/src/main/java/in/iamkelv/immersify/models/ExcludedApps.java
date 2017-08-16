@@ -3,6 +3,7 @@ package in.iamkelv.immersify.models;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Map;
 import java.util.Set;
 
 public class ExcludedApps {
@@ -12,6 +13,7 @@ public class ExcludedApps {
 
     public ExcludedApps(Context context) {
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
     }
 
     public Set<String> getAll() {
